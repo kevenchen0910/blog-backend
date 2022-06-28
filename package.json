@@ -21,9 +21,23 @@
   },
   "scripts": {
     "prepare": "husky install",
+    "dev": "nest start --watch",
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "start": "node dist/main",
     "lint": "eslint \"src/**/*.ts\""
   },
-  "dependencies": {},
+  "dependencies": {
+    "@nestjs/cli": "^8.2.8",
+    "@nestjs/common": "^8.4.7",
+    "@nestjs/config": "^2.1.0",
+    "@nestjs/core": "^8.4.7",
+    "@nestjs/platform-express": "^8.4.7",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.5.5"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.30.0",
     "@typescript-eslint/parser": "^5.30.0",
@@ -35,6 +49,7 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
     "tslib": "^2.4.0",
     "typescript": "^4.7.4"
   },
@@ -97,6 +112,16 @@
       "import/extensions": 0,
       "import/prefer-default-export": 0,
       "class-methods-use-this": 0,
+      "no-console": [
+        2,
+        {
+          "allow": [
+            "info",
+            "warn",
+            "error"
+          ]
+        }
+      ],
       "@typescript-eslint/no-shadow": 0
     }
   },
