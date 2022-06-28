@@ -1,0 +1,114 @@
+{
+  "name": "blog-backend",
+  "version": "0.0.1",
+  "description": "Backend service for blog system, base on Nestjs + Prismajs.",
+  "keywords": [
+    "blog",
+    "nestjs",
+    "prisma",
+    "node",
+    "azure",
+    "azure function"
+  ],
+  "author": "Keven Chen <han7586917@outlook.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevenChesn/blog-backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KevenChesn/blog-backend/issues"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint \"src/**/*.ts\""
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@typescript-eslint/parser": "^5.30.0",
+    "eslint": "^8.18.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4"
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "endOfLine": "lf",
+    "insertPragma": false,
+    "printWidth": 120,
+    "requirePragma": false,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all"
+  },
+  "eslintConfig": {
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "extends": [
+      "airbnb-base",
+      "airbnb-typescript/base",
+      "prettier/prettier",
+      "plugin:import/errors",
+      "plugin:import/typescript"
+    ],
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "env": {
+      "node": true,
+      "es6": true,
+      "jest": true
+    },
+    "ignorePatterns": [
+      "node_modules/**",
+      "dist/**"
+    ],
+    "rules": {
+      "import/order": [
+        2,
+        {
+          "groups": [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index"
+          ],
+          "newlines-between": "always",
+          "alphabetize": {
+            "order": "asc",
+            "caseInsensitive": true
+          }
+        }
+      ],
+      "import/extensions": 0,
+      "import/prefer-default-export": 0,
+      "class-methods-use-this": 0,
+      "@typescript-eslint/no-shadow": 0
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint",
+      "git add"
+    ]
+  }
+}
