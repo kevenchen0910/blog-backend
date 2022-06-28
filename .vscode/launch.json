@@ -1,9 +1,15 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "configurations": [
     {
       "command": "yarn dev",
-      "name": "Debug",
+      "name": "Debug Nest App",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "yarn dev:func",
+      "name": "Debug Azure Function App",
       "request": "launch",
       "type": "node-terminal"
     }

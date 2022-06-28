@@ -1,14 +1,11 @@
-import { NestFactory } from '@nestjs/core';
+import { createApp } from './main.azure';
 
-import { AppModule } from './app.module';
-
-(async function main() {
+(async function bootstrap() {
   const { PORT, HOST } = process.env;
   const port = Number(PORT) || 8000;
   const host = HOST || '0.0.0.0';
-  const app = await NestFactory.create(AppModule);
+  const app = await createApp();
 
-  // start listening
   await app.listen(port, host);
 
   // log server url
