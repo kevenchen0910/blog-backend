@@ -1,7 +1,16 @@
 *.js.map
 *.ts
 .git*
-.vscode
+.github/
+.husky/
+.vscode/
+.editorconfig
+.env*
+.gitattributes
+.gitignore
+.prettierignore
 local.settings.json
+nest-cli.json
 test
+tsconfig.build.json
 tsconfig.json

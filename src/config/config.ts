@@ -1,13 +1,18 @@
 import { Config } from './config.interfaces';
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 export const configFactory = async () => {
   const config: Config = ({
     graphql: {
-      autoSchemaFile: './src/schema.gql',
+      /**
+       * use in-memory schema file by default
+       *
+       * NOTE: could not write file in azure function runtime
+       * */
+      autoSchemaFile: true,
       debug: false,
-      playground: !isProduction,
+      playground: isDevelopment,
       sortSchema: true,
       useGlobalPrefix: true,
     },

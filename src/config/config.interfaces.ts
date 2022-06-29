@@ -1,5 +1,5 @@
 export interface GraphQLConfig {
-  autoSchemaFile?: string;
+  autoSchemaFile?: string | boolean;
   debug?: boolean;
   playground?: boolean;
   sortSchema?: boolean;
