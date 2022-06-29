@@ -37,4 +37,13 @@ export class UserService {
       }
     }
   }
+
+  async validate(uid: string) {
+    const user = await this.prisma.user
+      .findUnique({
+        where: { id: uid },
+      }) as User;
+
+    return user;
+  }
 }
