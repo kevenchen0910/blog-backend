@@ -15,6 +15,10 @@ export const configFactory = async () => {
   const {
     BCRYPT_SALT,
     BCRYPT_ROUND = 8,
+
+    JWT_SECRET = 'jwt_secret',
+    JWT_EXPIRES_IN = '1h',
+    JWT_REFRESH_IN = '1d',
   } = process.env;
   const config: Config = ({
     graphql: {
@@ -31,6 +35,9 @@ export const configFactory = async () => {
     },
     security: {
       bcryptSaltOrRounds: BCRYPT_SALT || Number(BCRYPT_ROUND),
+      secret: JWT_SECRET,
+      expiresIn: JWT_EXPIRES_IN,
+      refreshIn: JWT_REFRESH_IN,
     },
   });
 

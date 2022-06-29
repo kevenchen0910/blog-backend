@@ -7,6 +7,9 @@ export interface GraphQLConfig {
 }
 
 export interface SecurityConfig {
+  secret?: string | Buffer;
+  expiresIn?: string;
+  refreshIn?: string;
   bcryptSaltOrRounds: string | number;
 }
 

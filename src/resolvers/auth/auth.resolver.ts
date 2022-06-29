@@ -2,23 +2,23 @@ import 'reflect-metadata';
 
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { User } from '../../models';
+import { Auth } from '../../models';
 import { AuthService } from '../../services';
 
 import { SignupInput } from './dto';
 
-@Resolver(() => User)
+@Resolver(() => Auth)
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
-  @Mutation(() => User)
+  @Mutation(() => Auth)
   async signup(@Args('data') data: SignupInput) {
     const email = data.email.toLowerCase();
-    const user = await this.authService.signup({
+    const auth = await this.authService.signup({
       ...data,
       email,
     });
 
-    return user;
+    return auth;
   }
 }
