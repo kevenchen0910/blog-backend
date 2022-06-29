@@ -2,13 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "yarn dev",
+      "command": "npm run dev",
       "name": "Debug Nest App",
       "request": "launch",
       "type": "node-terminal"
     },
     {
-      "command": "yarn dev:func",
+      "command": "npm run dev:func",
       "name": "Debug Azure Function App",
       "request": "launch",
       "type": "node-terminal"
