@@ -1,1 +1,1 @@
-export * from './hello.model';
+export * from './user.model';
