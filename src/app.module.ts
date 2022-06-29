@@ -7,7 +7,7 @@ import { GraphQLModule, GraphQLSchemaHost, NumberScalarMode } from '@nestjs/grap
 
 import { GqlHttpContext } from './common/context';
 import { configFactory, GraphQLConfig } from './config';
-import { UserModule } from './resolvers';
+import { AuthModule, UserModule } from './resolvers';
 
 @Module({
   imports: [
@@ -40,6 +40,7 @@ import { UserModule } from './resolvers';
       },
       inject: [ConfigService, GraphQLSchemaHost],
     }),
+    AuthModule,
     UserModule,
   ],
 })
