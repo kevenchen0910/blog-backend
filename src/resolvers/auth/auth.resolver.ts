@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { User } from '../../models';

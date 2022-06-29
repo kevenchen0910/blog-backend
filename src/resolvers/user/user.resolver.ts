@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import { UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
 

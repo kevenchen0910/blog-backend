@@ -1,7 +1,8 @@
+import 'reflect-metadata';
+
 import { ExecutionContext, Injectable } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
-import 'reflect-metadata';
 
 @Injectable()
 export class GqlAuthGuard extends AuthGuard('jwt') {

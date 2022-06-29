@@ -1,12 +1,14 @@
+import 'reflect-metadata';
+
 import { Module } from '@nestjs/common';
 
 import {
-  AuthService, PrismaService, UserService,
+  AuthService, PasswordService, PrismaService, UserService,
 } from '../../services';
 
 import { AuthResolver } from './auth.resolver';
 
 @Module({
-  providers: [AuthResolver, AuthService, UserService, PrismaService],
+  providers: [AuthResolver, AuthService, UserService, PasswordService, PrismaService],
 })
 export class AuthModule {}

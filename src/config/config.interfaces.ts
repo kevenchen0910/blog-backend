@@ -6,6 +6,11 @@ export interface GraphQLConfig {
   useGlobalPrefix?: boolean;
 }
 
+export interface SecurityConfig {
+  bcryptSaltOrRounds: string | number;
+}
+
 export interface Config {
   graphql: GraphQLConfig;
+  security: SecurityConfig;
 }
