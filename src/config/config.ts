@@ -19,6 +19,8 @@ export const configFactory = async () => {
     JWT_SECRET = 'jwt_secret',
     JWT_EXPIRES_IN = '1h',
     JWT_REFRESH_IN = '1d',
+
+    COOKIE_SECRET = 'cookie_secret',
   } = process.env;
   const config: Config = ({
     graphql: {
@@ -38,6 +40,13 @@ export const configFactory = async () => {
       secret: JWT_SECRET,
       expiresIn: JWT_EXPIRES_IN,
       refreshIn: JWT_REFRESH_IN,
+    },
+    cookies: {
+      secret: COOKIE_SECRET,
+      path: '/',
+      httpOnly: true,
+      secure: !isDevelopment,
+      sameSite: true,
     },
   });
 

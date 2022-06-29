@@ -1,7 +1,10 @@
 import 'reflect-metadata';
 
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import {
+  Args, Context, Mutation, Resolver,
+} from '@nestjs/graphql';
 
+import { GqlHttpContext } from '../../common/context';
 import { Auth } from '../../models';
 import { AuthService } from '../../services';
 
@@ -12,13 +15,21 @@ export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => Auth)
-  async signup(@Args('data') data: SignupInput) {
+  async signup(
+  @Context() context: GqlHttpContext,
+    @Args('data') data: SignupInput,
+  ) {
     const email = data.email.toLowerCase();
-    const auth = await this.authService.signup({
+    const { refreshToken, ...restProps } = await this.authService.signup({
       ...data,
       email,
     });
 
-    return auth;
+    this.authService.setRefreshCookie(context, refreshToken);
+
+    return {
+      ...restProps,
+      refreshToken,
+    };
   }
 }
