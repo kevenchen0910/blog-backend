@@ -8,7 +8,7 @@ import { GqlHttpContext } from '../../common/context';
 import { Auth } from '../../models';
 import { AuthService } from '../../services';
 
-import { SignupInput } from './dto';
+import { LoginInput, SignupInput } from './dto';
 
 @Resolver(() => Auth)
 export class AuthResolver {
@@ -24,6 +24,24 @@ export class AuthResolver {
       ...data,
       email,
     });
+
+    this.authService.setRefreshCookie(context, refreshToken);
+
+    return {
+      ...restProps,
+      refreshToken,
+    };
+  }
+
+  @Mutation(() => Auth)
+  async login(
+  @Context() context: GqlHttpContext,
+    @Args('data') { email, password }: LoginInput,
+  ) {
+    const { refreshToken, ...restProps } = await this.authService.login(
+      email.toLowerCase(),
+      password,
+    );
 
     this.authService.setRefreshCookie(context, refreshToken);
 

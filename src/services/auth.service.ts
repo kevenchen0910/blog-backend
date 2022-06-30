@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import dayjs, { ManipulateType } from 'dayjs';
@@ -8,9 +8,11 @@ import dayjs, { ManipulateType } from 'dayjs';
 import { GqlHttpContext } from '../common/context';
 import { getDomainFromHost } from '../common/helpers';
 import { CookiesConfig, SecurityConfig } from '../config';
-import { Auth, Token } from '../models';
+import { Auth, Token, User } from '../models';
 import type { JwtDto, SignupInput } from '../resolvers';
 
+import { PasswordService } from './password.service';
+import { PrismaService } from './prisma.service';
 import { UserService } from './user.service';
 
 @Injectable()
@@ -21,6 +23,8 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
+    private readonly prisma: PrismaService,
+    private readonly passwordService: PasswordService,
   ) {}
 
   async signup(payload: SignupInput): Promise<Auth> {
@@ -78,5 +82,31 @@ export class AuthService {
       secure,
       sameSite,
     });
+  }
+
+  async login(email: string, password: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+    }) as User;
+
+    if (!user) {
+      throw new NotFoundException(`No user found with email ${email}`);
+    }
+
+    const isPasswordValid = this.passwordService.validatePassword(
+      password,
+      user.password,
+    );
+
+    if (!isPasswordValid) {
+      throw new BadRequestException('Invalid password');
+    }
+
+    return {
+      user,
+      ...this.generateToken({
+        uid: user.id,
+      }),
+    };
   }
 }

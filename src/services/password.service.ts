@@ -2,7 +2,7 @@ import 'reflect-metadata';
 
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { hash } from 'bcrypt';
+import { compare, hash } from 'bcrypt';
 
 import { SecurityConfig } from '../config';
 
@@ -19,5 +19,9 @@ export class PasswordService {
 
   hashPassword(password: string): Promise<string> {
     return hash(password, this.bcryptSaltOrRounds);
+  }
+
+  validatePassword(password: string, hashedPassword: string): Promise<boolean> {
+    return compare(password, hashedPassword);
   }
 }
