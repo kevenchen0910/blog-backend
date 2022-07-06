@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 
 import { omit } from '../common/helpers';
 import { PaginationArgs } from '../common/pagination';
-import { PostConnection, PostOrder, PostStatus } from '../models';
+import { PostConnection, PostOrder } from '../models';
 
 import { PrismaService } from './prisma.service';
 
@@ -17,10 +17,10 @@ export class PostService {
     pagination?: PaginationArgs,
     query?: string,
     orderBy?: PostOrder,
-    status?: PostStatus,
+    onlyPublished?: boolean,
   ): Promise<PostConnection> {
     const where = {
-      status,
+      isPublished: onlyPublished ? true : undefined,
       title: {
         contains: query || '',
       },
