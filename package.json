@@ -32,6 +32,7 @@
     "lint": "eslint \"src/**/*.ts\""
   },
   "dependencies": {
+    "@devoxa/prisma-relay-cursor-connection": "^2.2.2",
     "@nestjs/apollo": "^10.0.16",
     "@nestjs/azure-func-http": "^0.8.0",
     "@nestjs/common": "^8.4.7",
