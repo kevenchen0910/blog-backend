@@ -13,4 +13,23 @@ model User {
   username String?
   avatar   String?
   password String
+  Post     Post[]
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+  DELETED
+}
+
+model Post {
+  id       String     @id @default(cuid())
+  createAt DateTime   @default(now())
+  updateAt DateTime   @updatedAt
+  title    String     @unique @db.VarChar(255)
+  content  String?
+  status   PostStatus @default(DRAFT)
+  authorId String
+  author   User       @relation(fields: [authorId], references: [id])
 }
