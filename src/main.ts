@@ -1,4 +1,4 @@
-import { createApp } from './main.azure';
+import { createApp } from './app';
 
 (async function bootstrap() {
   const { PORT, HOST } = process.env;
